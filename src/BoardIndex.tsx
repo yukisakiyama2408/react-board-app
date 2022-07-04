@@ -1,10 +1,10 @@
-import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const BoardIndex = () => {
-  const BoardIndexApi = "techtrain-railway-api.herokuapp.com/threads";
   const [threads, setThreads] = useState<Array<any>>([]);
+  const BoardIndexApi =
+    "virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads";
 
   useEffect(() => {
     axios
@@ -19,16 +19,17 @@ const BoardIndex = () => {
         setThreads(res.data);
       });
   }, []);
-  return;
-  <>
-    <div>aaa</div>
-    {/* {threads.map((data))=>{
-    return 
-    <div>
-        <div>{data.id}</div>
-    </div>
-  }} */}
-  </>;
+  return (
+    <>
+      {threads.map((data) => {
+        return (
+          <div key={data.id}>
+            <div>{data.title}</div>
+          </div>
+        );
+      })}
+    </>
+  );
 };
 
 export { BoardIndex };
