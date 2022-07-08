@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.card-section {
+  width: 40%;
+  margin: auto;
+}
+
+.index-card {
+  margin: 20px auto;
+}
+
+.add-btn {
+  width: 40%;
+  margin: auto;
+}
