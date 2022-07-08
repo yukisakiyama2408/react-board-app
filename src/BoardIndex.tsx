@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const BoardIndex = () => {
   const [threads, setThreads] = useState<Array<any>>([]);
   const BoardIndexApi =
-    "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads";
+    "https://railway-react-bulletin-board.herokuapp.com/threads";
 
   useEffect(() => {
     axios
