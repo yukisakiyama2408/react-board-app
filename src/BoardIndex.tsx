@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 const BoardIndex = () => {
   const [threads, setThreads] = useState<Array<any>>([]);
@@ -28,6 +31,9 @@ const BoardIndex = () => {
           </div>
         );
       })}
+      <Button component={Link} to={"/thread/new"}>
+        <AddIcon />
+      </Button>
     </>
   );
 };

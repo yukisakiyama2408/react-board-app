@@ -18,7 +18,7 @@ import { Controller } from "react-hook-form";
 
 const theme = createTheme();
 
-const threadNew = () => {
+const ThreadNew = () => {
   const navigate = useNavigate();
 
   const {
@@ -124,4 +124,4 @@ const threadNew = () => {
   );
 };
 
-export { threadNew };
+export { ThreadNew };
