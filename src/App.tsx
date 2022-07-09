@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { BoardIndex } from "./BoardIndex";
-import { ThreadNew } from "./threadNew";
+import { ThreadIndex } from "./ThreadIndex";
+import { ThreadNew } from "./ThreadNew";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<BoardIndex />} />
+          <Route path="/" element={<ThreadIndex />} />
           <Route path="/thread/new" element={<ThreadNew />} />
         </Routes>
       </BrowserRouter>

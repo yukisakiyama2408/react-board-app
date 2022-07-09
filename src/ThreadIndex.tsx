@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Card, CardContent } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-const BoardIndex = () => {
+const ThreadIndex = () => {
   const [threads, setThreads] = useState<Array<any>>([]);
   const BoardIndexApi =
     "https://railway-react-bulletin-board.herokuapp.com/threads";
@@ -53,4 +53,4 @@ const BoardIndex = () => {
   );
 };
 
-export { BoardIndex };
+export { ThreadIndex };
