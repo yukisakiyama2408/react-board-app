@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThreadIndex } from "./ThreadIndex";
-import { ThreadNew } from "./ThreadNew";
+import { ThreadIndex } from "./Thread/ThreadIndex";
+import { ThreadNew } from "./Thread/ThreadNew";
 
 const App = () => {
   return (
