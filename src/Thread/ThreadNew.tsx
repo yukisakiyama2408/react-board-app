@@ -1,12 +1,10 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   TextField,
   Button,
-  Avatar,
   CssBaseline,
   Grid,
   Typography,
@@ -21,12 +19,7 @@ const theme = createTheme();
 const ThreadNew = () => {
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({
+  const { handleSubmit, control } = useForm({
     mode: "onBlur",
     criteriaMode: "all",
     shouldFocusError: false,

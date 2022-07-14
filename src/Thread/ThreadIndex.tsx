@@ -1,7 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Card, CardContent } from "@mui/material";
+import {
+  Button,
+  Container,
+  Card,
+  CardContent,
+  CardActionArea,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 const ThreadIndex = () => {
@@ -30,9 +36,11 @@ const ThreadIndex = () => {
             <div>
               <div key={data.id} className="card-section">
                 <Card className="index-card">
-                  <CardContent>
-                    <div>{data.title}</div>
-                  </CardContent>
+                  <CardActionArea component={Link} to={`/thread/${data.id}`}>
+                    <CardContent>
+                      <div>{data.title}</div>
+                    </CardContent>
+                  </CardActionArea>
                 </Card>
               </div>
             </div>
