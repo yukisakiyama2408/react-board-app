@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useParams } from "react-router-dom";
 
-// type ThreadPost = {
-//   threadId: string;
-//   id: string;
-//   post: string;
-// };
+interface APIResponce {
+  threadId: string;
+  title: string;
+  posts: { id: string; post: string }[];
+}
 
 const ThreadPostIndex = () => {
   const { threadId } = useParams();
   console.log(threadId);
-  const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
-  const [threadPosts, setThreadPosts] = useState<Array<any>>([]);
+  const [threadPosts, setThreadPosts] = useState<APIResponce | undefined>(
+    undefined
+  );
 
   useEffect(() => {
+    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
     axios
       .get(threadPostUrl, {
         headers: {
@@ -26,18 +28,14 @@ const ThreadPostIndex = () => {
         console.log(res.data);
         setThreadPosts(res.data);
       });
-  }, [threadId, threadPostUrl]);
+  }, [threadId]);
   return (
     <>
-      <div>aaa</div>
       <div>
-        {threadPosts.map((posts) => {
-          return (
-            <>
-              <div key={posts.id}>{posts.post}</div>
-            </>
-          );
-        })}
+        {threadPosts &&
+          threadPosts.posts.map((post) => {
+            return <div>{post.post}</div>;
+          })}
       </div>
     </>
   );

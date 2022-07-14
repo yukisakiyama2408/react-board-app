@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThreadIndex } from "./Thread/ThreadIndex";
 import { ThreadNew } from "./Thread/ThreadNew";
-import { ThreadPostIndex } from "./ThreadPostIndex";
+import { ThreadPostIndex } from "./Post/ThreadPostIndex";
 
 const App = () => {
   return (
