@@ -37,16 +37,34 @@
   }
 }
 
-.card-section {
-  width: 40%;
+.thread-section {
+  margin: auto;
+}
+
+.thread-card-section {
+  width: 70%;
   margin: auto;
 }
 
 .index-card {
+  width: 70%;
   margin: 20px auto;
 }
 
 .add-btn {
   width: 40%;
   margin: auto;
+}
+
+.posts-section {
+  margin: auto;
+}
+
+.post-card-section {
+  width: 70%;
+  margin: auto;
+}
+
+.post-card {
+  margin: 40px auto;
 }

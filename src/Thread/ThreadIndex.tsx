@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CardActionArea,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -30,33 +31,38 @@ const ThreadIndex = () => {
   }, []);
   return (
     <>
-      <Container>
-        {threads.map((data) => {
-          return (
-            <div>
-              <div key={data.id} className="card-section">
-                <Card className="index-card">
-                  <CardActionArea component={Link} to={`/thread/${data.id}`}>
-                    <CardContent>
-                      <div>{data.title}</div>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </div>
+      <div className="thread-section">
+        <Container maxWidth="sm">
+          <div className="thread-card-section">
+            <Typography gutterBottom variant="h4" component="div">
+              スレッド一覧
+            </Typography>
+            {threads.map((data) => {
+              return (
+                <div>
+                  <Card key={data.id} className="index-card">
+                    <CardActionArea component={Link} to={`/thread/${data.id}`}>
+                      <CardContent>
+                        <div>{data.title}</div>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </div>
+              );
+            })}
+            <div className="add-btn">
+              <Button
+                component={Link}
+                to={"/thread/new"}
+                variant="contained"
+                endIcon={<AddIcon />}
+              >
+                スレッドを作成する
+              </Button>
             </div>
-          );
-        })}
-        <div className="add-btn">
-          <Button
-            component={Link}
-            to={"/thread/new"}
-            variant="contained"
-            endIcon={<AddIcon />}
-          >
-            スレッドを作成する
-          </Button>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </div>
     </>
   );
 };
