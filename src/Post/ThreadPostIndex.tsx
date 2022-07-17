@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useParams, Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 interface APIResponce {
   threadId: string;
@@ -10,13 +11,12 @@ interface APIResponce {
 
 const ThreadPostIndex = () => {
   const { threadId } = useParams();
-  console.log(threadId);
   const [threadPosts, setThreadPosts] = useState<APIResponce | undefined>(
     undefined
   );
 
   useEffect(() => {
-    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
+    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts?offset=10`;
     axios
       .get(threadPostUrl, {
         headers: {
@@ -34,8 +34,13 @@ const ThreadPostIndex = () => {
       <div>
         {threadPosts &&
           threadPosts.posts.map((post) => {
-            return <div>{post.post}</div>;
+            return <div key={post.id}>{post.post}</div>;
           })}
+      </div>
+      <div>
+        <Button component={Link} to={`/thread/new/${threadId}`}>
+          投稿する
+        </Button>
       </div>
     </>
   );

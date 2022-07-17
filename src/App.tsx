@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThreadIndex } from "./Thread/ThreadIndex";
 import { ThreadNew } from "./Thread/ThreadNew";
 import { ThreadPostIndex } from "./Post/ThreadPostIndex";
+import { ThreadPostNew } from "./Post/ThreadPostNew";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/" element={<ThreadIndex />} />
           <Route path="/thread/new" element={<ThreadNew />} />
           <Route path="/thread/:threadId" element={<ThreadPostIndex />} />
+          <Route path="/thread/new/:threadId" element={<ThreadPostNew />} />
         </Routes>
       </BrowserRouter>
     </>

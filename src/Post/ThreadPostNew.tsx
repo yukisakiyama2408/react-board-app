@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   TextField,
@@ -16,7 +16,7 @@ import { Controller } from "react-hook-form";
 
 const theme = createTheme();
 
-const ThreadNew = () => {
+const ThreadPostNew = () => {
   const navigate = useNavigate();
 
   const { handleSubmit, control } = useForm({
@@ -25,17 +25,17 @@ const ThreadNew = () => {
     shouldFocusError: false,
   });
 
+  const { threadId } = useParams();
+
   const onSubmit = (data: any) => {
-    const urlThreadApi =
-      "https://railway-react-bulletin-board.herokuapp.com/threads";
-    console.log(data);
+    const urlPostApi = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
     axios
-      .post(urlThreadApi, {
-        title: data.title,
+      .post(urlPostApi, {
+        post: data.post,
       })
       .then(function (response) {
         console.log(response);
-        navigate("/");
+        navigate(`/thread/${threadId}`);
       })
       .catch(function (error) {
         console.log(error);
@@ -55,11 +55,8 @@ const ThreadNew = () => {
               alignItems: "center",
             }}
           >
-            {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              {/* <LockOutlinedIcon /> */}
-            {/* </Avatar> */}
             <Typography component="h1" variant="h5">
-              スレッド作成
+              投稿作成
             </Typography>
             <Box
               component="form"
@@ -69,7 +66,7 @@ const ThreadNew = () => {
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Controller
-                    name="title"
+                    name="post"
                     control={control}
                     rules={{
                       required: "入力必須です。",
@@ -83,7 +80,7 @@ const ThreadNew = () => {
                       fieldState: { error },
                     }) => (
                       <TextField
-                        label="スレッド名"
+                        label="投稿"
                         required
                         fullWidth
                         value={value}
@@ -105,7 +102,7 @@ const ThreadNew = () => {
                 color="primary"
                 sx={{ mt: 3, mb: 2 }}
               >
-                スレッドを作成する
+                投稿する
               </Button>
             </Box>
           </Box>
@@ -115,4 +112,4 @@ const ThreadNew = () => {
   );
 };
 
-export { ThreadNew };
+export { ThreadPostNew };
