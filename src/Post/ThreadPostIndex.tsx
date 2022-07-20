@@ -1,14 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
-import {
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Typography,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { useParams } from "react-router-dom";
+import { Card, CardContent, Container, Typography } from "@mui/material";
+import { ThreadPostNew } from "./ThreadPostNew";
 
 interface APIResponce {
   threadId: string;
@@ -36,6 +30,20 @@ const ThreadPostIndex = () => {
         setThreadPosts(res.data);
       });
   }, [threadId]);
+  const onNewThread = () => {
+    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
+    axios
+      .get(threadPostUrl, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {},
+      })
+      .then((res) => {
+        console.log(res.data);
+        setThreadPosts(res.data);
+      });
+  };
   return (
     <>
       <div className="posts-section">
@@ -57,14 +65,7 @@ const ThreadPostIndex = () => {
                 );
               })}
             <div>
-              <Button
-                variant="contained"
-                startIcon={<AddIcon />}
-                component={Link}
-                to={`/thread/new/${threadId}`}
-              >
-                投稿する
-              </Button>
+              <ThreadPostNew onNewThread={onNewThread} text="TypeScript" />
             </div>
           </div>
         </Container>

@@ -57,7 +57,7 @@ const ThreadIndex = () => {
                 variant="contained"
                 endIcon={<AddIcon />}
               >
-                スレッドを作成する
+                スレッド作成
               </Button>
             </div>
           </div>

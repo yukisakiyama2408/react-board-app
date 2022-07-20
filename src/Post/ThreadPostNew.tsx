@@ -1,6 +1,5 @@
-import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Box,
   TextField,
@@ -12,22 +11,17 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
-import { Controller } from "react-hook-form";
+
+type FormProps = {
+  post: string;
+};
 
 const theme = createTheme();
 
-const ThreadPostNew = () => {
-  const navigate = useNavigate();
-
-  const { handleSubmit, control } = useForm({
-    mode: "onBlur",
-    criteriaMode: "all",
-    shouldFocusError: false,
-  });
-
+const ThreadPostNew = (props: any) => {
   const { threadId } = useParams();
 
-  const onSubmit = (data: any) => {
+  const handleSubmit = (data: any) => {
     const urlPostApi = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
     axios
       .post(urlPostApi, {
@@ -35,7 +29,7 @@ const ThreadPostNew = () => {
       })
       .then(function (response) {
         console.log(response);
-        navigate(`/thread/${threadId}`);
+        props.onNewThread();
       })
       .catch(function (error) {
         console.log(error);
@@ -55,43 +49,17 @@ const ThreadPostNew = () => {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
-              投稿作成
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit(onSubmit)}
-              sx={{ mt: 3 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Controller
+                  <TextField
                     name="post"
-                    control={control}
-                    rules={{
-                      required: "入力必須です。",
-                      maxLength: {
-                        value: 30,
-                        message: "30文字以下で入力してくださいね！",
-                      },
-                    }}
-                    render={({
-                      field: { onBlur, onChange, value },
-                      fieldState: { error },
-                    }) => (
-                      <TextField
-                        label="投稿"
-                        required
-                        fullWidth
-                        value={value}
-                        variant="outlined"
-                        margin="normal"
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        error={Boolean(error)}
-                        helperText={error?.message}
-                      />
-                    )}
+                    label="投稿"
+                    required
+                    fullWidth
+                    value={props.threadPosts}
+                    variant="outlined"
+                    margin="normal"
                   />
                 </Grid>
               </Grid>
