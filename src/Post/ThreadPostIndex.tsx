@@ -17,7 +17,7 @@ const ThreadPostIndex = () => {
   );
 
   useEffect(() => {
-    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
+    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts?offset=20`;
     axios
       .get(threadPostUrl, {
         headers: {
@@ -30,20 +30,20 @@ const ThreadPostIndex = () => {
         setThreadPosts(res.data);
       });
   }, [threadId]);
-  const onNewThread = () => {
-    const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
-    axios
-      .get(threadPostUrl, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {},
-      })
-      .then((res) => {
-        console.log(res.data);
-        setThreadPosts(res.data);
-      });
-  };
+  // const onNewThread = () => {
+  //   const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
+  //   axios
+  //     .get(threadPostUrl, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       data: {},
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setThreadPosts(res.data);
+  //     });
+  // };
   return (
     <>
       <div className="posts-section">
@@ -65,7 +65,22 @@ const ThreadPostIndex = () => {
                 );
               })}
             <div>
-              <ThreadPostNew onNewThread={onNewThread} text="TypeScript" />
+              <ThreadPostNew
+                onNewThread={() => {
+                  const threadPostUrl = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts?offset=20`;
+                  axios
+                    .get(threadPostUrl, {
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      data: {},
+                    })
+                    .then((res) => {
+                      console.log(res.data);
+                      setThreadPosts(res.data);
+                    });
+                }}
+              />
             </div>
           </div>
         </Container>

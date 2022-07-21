@@ -21,11 +21,13 @@ const theme = createTheme();
 const ThreadPostNew = (props: any) => {
   const { threadId } = useParams();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    console.log(event);
     const urlPostApi = `https://railway-react-bulletin-board.herokuapp.com/threads/${threadId}/posts`;
     axios
       .post(urlPostApi, {
-        post: data.post,
+        post: event.target.elements.post.value,
       })
       .then(function (response) {
         console.log(response);
@@ -34,6 +36,7 @@ const ThreadPostNew = (props: any) => {
       .catch(function (error) {
         console.log(error);
       });
+    event.target.elements.post.value = "";
   };
 
   return (
@@ -57,7 +60,7 @@ const ThreadPostNew = (props: any) => {
                     label="投稿"
                     required
                     fullWidth
-                    value={props.threadPosts}
+                    // value={props.threadPosts}
                     variant="outlined"
                     margin="normal"
                   />
